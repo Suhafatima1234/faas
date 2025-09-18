@@ -1,17 +1,17 @@
 // Simulated ML prediction: preload data
-const predictedHot = true;    // pretend ML predicted this function will be called
+const predictedHot = true;
 let bigData = [];
 
 if (predictedHot) {
-    // Preload data to reduce cold start
-    bigData = Array.from({length: 1e6}, (_, i) => i);
+    // Preload large data to simulate cold start time
+    bigData = Array.from({length: 1e7}, (_, i) => i);
 }
 
 export default function handler(req, res) {
     const start = Date.now();
 
-    // Simulate function work using preloaded data
-    const result = bigData.length;  
+    // Simulate some work using preloaded data
+    const sum = bigData.reduce((a, b) => a + b, 0);
 
     const duration = Date.now() - start;
     res.status(200).json({
